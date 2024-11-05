@@ -1,4 +1,3 @@
-MissingYou
 MissingYou is a simple Android app that keeps track of button clicks, counting the number of times a button has been pressed and displaying the total. The count resets daily to encourage regular use.
 
 Features
