@@ -14,6 +14,9 @@ android {
         targetSdkVersion(34) // Cambia a tu versión objetivo deseada
         versionCode = 1
         versionName = "1.0"
+
+        // Configura el runner de pruebas de instrumentación
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     compileOptions {
@@ -43,6 +46,7 @@ android {
         }
     }
 }
+
 repositories {
     google()
     jcenter()
@@ -50,6 +54,7 @@ repositories {
 }
 
 dependencies {
+    // Dependencias principales de la app
     implementation("androidx.compose.ui:ui:1.7.5")
     implementation("androidx.compose.material3:material3:1.3.1")
     implementation("androidx.compose.ui:ui-tooling:1.7.5")
@@ -60,4 +65,17 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.7.0")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.15") // Actualiza la versión de Kotlin si es necesario
     implementation("androidx.compose.compiler:compiler:1.5.15") // Asegúrate de que la versión sea compatible
+
+    // Dependencias para pruebas unitarias
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("org.mockito:mockito-core:4.6.1")
+
+    // Dependencias para pruebas instrumentadas
+    androidTestImplementation("androidx.test.ext:junit:1.1.5") // Última versión de JUnit para pruebas instrumentadas
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1") // Para pruebas de UI
+    androidTestImplementation("androidx.test:core:1.6.0") // Dependencia base de pruebas
+    androidTestImplementation("androidx.test:runner:1.5.2") // Runner de las pruebas
+
+    // Dependencias para Mockito en pruebas instrumentadas
+    androidTestImplementation("org.mockito:mockito-android:4.6.1")
 }

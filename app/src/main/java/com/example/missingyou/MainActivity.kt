@@ -10,7 +10,7 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-    private var count = 0
+    internal var count = 0
     private lateinit var countTextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,13 +36,15 @@ class MainActivity : AppCompatActivity() {
         resetCountIfNewDay()
     }
 
-    private fun incrementCount() {
+    internal fun incrementCount() {  // Changed to internal for testing access
         count++
-        countTextView.text = "Conteo: $count"
+        runOnUiThread {  // Asegúrate de actualizar en el hilo principal
+            countTextView.text = "Conteo: $count"
+        }
         saveCount()
     }
 
-    private fun saveCount() {
+    internal fun saveCount() {  // Changed to internal for testing access
         val sharedPreferences = getSharedPreferences("CountPrefs", Context.MODE_PRIVATE)
         with(sharedPreferences.edit()) {
             putInt("count", count)
@@ -51,19 +53,23 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun loadCount() {
+    internal fun loadCount() {  // Changed to internal for testing access
         val sharedPreferences = getSharedPreferences("CountPrefs", Context.MODE_PRIVATE)
         count = sharedPreferences.getInt("count", 0)
-        countTextView.text = "Conteo: $count"
+        runOnUiThread {  // Asegúrate de actualizar en el hilo principal
+            countTextView.text = "Conteo: $count"
+        }
     }
 
-    private fun resetCountIfNewDay() {
+    internal fun resetCountIfNewDay() {  // Changed to internal for testing access
         val sharedPreferences = getSharedPreferences("CountPrefs", Context.MODE_PRIVATE)
         val lastDate = sharedPreferences.getString("lastDate", "")
 
         if (lastDate != getCurrentDate()) {
             count = 0
-            countTextView.text = "Conteo: $count"
+            runOnUiThread {  // Asegúrate de actualizar en el hilo principal
+                countTextView.text = "Conteo: $count"
+            }
             saveCount() // Guardar el conteo reseteado y la fecha actual
         }
     }
@@ -74,6 +80,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showError(message: String?) {
-        countTextView.text = message ?: "Error desconocido"
+        runOnUiThread {  // Asegúrate de actualizar en el hilo principal
+            countTextView.text = message ?: "Error desconocido"
+        }
     }
 }
