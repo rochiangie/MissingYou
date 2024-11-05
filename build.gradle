@@ -1,0 +1,19 @@
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:2.0.21") // Keep the Kotlin version
+        classpath('com.android.tools.build:gradle:8.3.1')
+        //classpath("com.github.ben-manes:gradle-versions-plugin:0.46.0")
+
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
